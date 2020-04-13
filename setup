@@ -1,0 +1,14 @@
+void setup() { //define the inputs and the outputs
+
+  pinMode(front, OUTPUT);
+  pinMode(back, OUTPUT);
+  pinMode(left, OUTPUT);
+  pinMode(right, OUTPUT);
+  pinMode(flights, OUTPUT);
+  pinMode(rlights, OUTPUT);
+ 
+  Serial.begin(9600);
+  
+  bluetooth.begin(9600);
+
+}
