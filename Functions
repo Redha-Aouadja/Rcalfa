@@ -1,0 +1,103 @@
+void loop() {
+
+  get_command();
+
+  Serial.println(command); // to show the actual user commands
+
+do_action(command); //the function of all controls
+  
+  
+  
+ 
+}
+
+void get_command (){
+    while (bluetooth.available() <= 0) {
+    }
+    command = bluetooth.read();
+      do_action(command);
+  }
+  
+ void do_action(char act){
+  switch (act) { //those cases are optimsed to work with arduino car remote app
+      case 'F':  //moving the Car Forward
+  
+        digitalWrite(back, LOW);
+        digitalWrite(front, HIGH);
+        digitalWrite(left, LOW);
+        digitalWrite(right, LOW);
+       
+        break;
+      case 'B':  //moving the Car Backward
+        digitalWrite(front, LOW);
+        digitalWrite(back, HIGH);
+        digitalWrite(left, LOW);
+        digitalWrite(right, LOW);
+
+        break;
+      case 'L':  //moving the Car Left
+        digitalWrite(front, LOW);
+        digitalWrite(left, HIGH);
+        digitalWrite(right, LOW);
+        digitalWrite(back, LOW);
+
+
+        break;
+      case 'R':   //moving the Car Right
+        digitalWrite(front, LOW);
+        digitalWrite(right, HIGH);
+        digitalWrite(back, LOW);
+        digitalWrite(left, LOW);
+     
+
+        break;
+      case 'S':   //Stop
+        
+        digitalWrite(front, LOW);
+        digitalWrite(back, LOW);
+        digitalWrite(left, LOW);
+        digitalWrite(right, LOW);
+
+        break;
+      case 'I':  //moving Forward right
+        digitalWrite(back, LOW);
+        digitalWrite(front, HIGH);
+        digitalWrite(left, LOW);
+        digitalWrite(right, HIGH);
+        break;
+      case 'J':  //moving  backward right
+        digitalWrite(front, LOW);
+        digitalWrite(back, HIGH);
+        digitalWrite(left, LOW);
+        digitalWrite(right, HIGH);
+        break;
+      case 'G':  //moving Car Forward left
+        digitalWrite(back, LOW);
+        digitalWrite(front, HIGH);
+        digitalWrite(right, LOW);
+        digitalWrite(left, HIGH);
+
+        break;
+      case 'H':  //moving the Car backward left
+        digitalWrite(front, LOW);
+        digitalWrite(back, HIGH);
+        digitalWrite(right, LOW);
+        digitalWrite(left, HIGH);
+        break;
+        case 'W' : //turning on the lights
+        digitalWrite(flights, HIGH);
+        digitalWrite(rlights, HIGH);
+        break;
+        case 'w' : //turning off the lights
+        digitalWrite(flights, LOW);
+        digitalWrite(rlights, LOW);
+        break;
+        case 'U' : //turning on all the big led light
+        digitalWrite(spot, HIGH);
+        break;
+        case 'u' : //turning it off
+        digitalWrite(spot, LOW);
+        break;
+      default : break;
+  }
+  }
